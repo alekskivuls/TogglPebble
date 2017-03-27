@@ -29,9 +29,9 @@
                 "type": "font"
             },
             {
-                "file": "images/MenuIcon",
+                "file": "images/MenuIcon.png",
                 "menuIcon": true,
-                "name": "IMAGES_MENUICON",
+                "name": "IMAGES_MENUICON_PNG",
                 "type": "bitmap"
             }
         ]
