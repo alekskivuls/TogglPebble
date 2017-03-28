@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Toggl Pebble Settings</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>
-  $(document).ready(function(e) {
-    $("#subButton").click(function(e) {
-      var apiKey = document.getElementById("api_key").value;
-      var options = { api_key: apiKey };
-        document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
-    });
-  });
-</script>
-</head>
-<body>
-<p style="text-align: center">Toggl Settings</p>
-
-<p>Api Key:</p>
-<input style="width: 100%" type="text" id="api_key">
-<br><br><br>
-<button style="width: 100%" id="subButton">Submit</button>
-</body>
+	<head>
+		<title>Toggl Pebble Settings</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(e) {
+			  $("#subButton").click(function(e) {
+			    var apiKey = document.getElementById("api_key").value;
+			    var options = { api_key: apiKey };
+			      document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
+			  });
+			});
+		</script>
+	</head>
+	<body>
+		<p style="text-align: center">Toggl Settings</p>
+		<p>Api Key:</p>
+		<div style="border:1px solid gray;">
+			<input style="display:block; width:100%;padding:0;border-width:0" type="text" id="api_key">
+		</div>
+		<br><br><br>
+		<button style="width: 100%" id="subButton">Submit</button>
+	</body>
 </html>
