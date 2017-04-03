@@ -1,5 +1,6 @@
 var UI = require('ui');
 var Settings = require('settings');
+var Toggl = require('togglUtil');
 
 Settings.config({
         url: 'https://alekskivuls.github.io/TogglPebble/'
@@ -19,21 +20,6 @@ Settings.config({
     }
 );
 
-var encodedToken = localStorage.getItem('encoded_token');
-var togglRequest = function(requestMethod, endpoint, body) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open(requestMethod, 'https://toggl.com/api/v8/' + endpoint, false);
-    xhttp.setRequestHeader('Authorization', 'Basic ' + encodedToken);
-    xhttp.setRequestHeader('Content-type', 'application/json');
-    if (body !== null) {
-        xhttp.setRequestHeader('Content-length', body.length);
-    }
-    xhttp.send(body);
-    console.log(xhttp.status);
-    console.log(xhttp.responseText);
-    return JSON.parse(xhttp.responseText);
-};
-
 var main = new UI.Card({
     title: 'Project',
     subtitle: 'Tag',
@@ -42,7 +28,7 @@ var main = new UI.Card({
     bodyColor: '#9a0036' // Hex colors
 });
 
-if (encodedToken === 'undefined' || !encodedToken) {
+if (Toggl.encodedToken === 'undefined' || !Toggl.encodedToken) {
     var noToken = new UI.Card({
         title: 'API Token',
         body: 'Toggl API token not set inside settings',
@@ -53,12 +39,18 @@ if (encodedToken === 'undefined' || !encodedToken) {
 } else {
     main.show();
 }
-console.log(encodedToken);
+console.log(Toggl.encodedToken);
 
-togglRequest('GET', 'time_entries/current', null);
-
+var currData = Toggl.request('GET', 'time_entries/current', null);
+var projectData = Toggl.request('GET', 'projects/'+currData.data.pid, null);
+console.log(projectData.data.name);
+console.log(currData.data.tags[0]);
+console.log(currData.data.start);
 main.show();
-//main.title('test');
+
+main.title(projectData.data.name);
+main.subtitle(currData.data.tags[0]);
+main.body('Time Started: \n'+currData.data.start);
 
 
 var workspaceMenu = new UI.Menu({

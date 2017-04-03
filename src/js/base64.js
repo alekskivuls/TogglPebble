@@ -138,6 +138,6 @@ _utf8_decode : function (utftext) {
     return string;
 }
 
-}
+};
 
 this.exports = Base64;
