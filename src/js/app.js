@@ -36,4 +36,4 @@ console.log(currData.data.start);
 
 AppUi.main.title(projectData.data.name);
 AppUi.main.subtitle(currData.data.tags[0]);
-AppUi.main.body('Time Started: \n' + currData.data.start);
+AppUi.main.body('Time Started: \n' + Toggl.parseTime(currData.data.start).toString());
